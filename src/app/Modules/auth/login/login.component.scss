@@ -1,0 +1,107 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+
+}
+
+.login-box {
+    background: linear-gradient(135deg, #ffffff, #c1d4e9);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(1);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4rem;
+}
+
+.logo-container img {
+    width: 80px;
+    /* Adjust as per your logo size */
+    height: auto;
+    margin-right: 10px;
+    /* Adjust spacing between logo and title */
+}
+
+.vertical-line {
+    height: 70px;
+    /* Adjust the height of the vertical line */
+    width: 2px;
+    /* Adjust the width of the vertical line */
+    background-color: #000000;
+    /* Adjust the color of the vertical line */
+    margin: 0 10px;
+    /* Adjust spacing around the vertical line */
+}
+
+.p-field {
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+button {
+    width: 100%;
+    background-color: #6e8efb !important;
+    border: none !important;
+}
+
+.social-login {
+    margin-top: 1.5rem;
+    text-align: center;
+
+    p {
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    .social-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+
+        button {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+    }
+}
+.additional-links {
+    margin-top: 10px; 
+    font-size: 14px;
+    text-align: left;
+    margin-top: 1.5rem;
+}
+
+.additional-links a {
+    color: #2f00ff;
+    text-decoration: none;
+}
+
+.additional-links a:hover {
+    text-decoration: underline;
+}

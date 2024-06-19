@@ -1,0 +1,44 @@
+::ng-deep .p-toast {
+    max-width: 300px !important;
+    /* Set your desired width */
+  }
+  
+  ::ng-deep .p-toast .p-toast-message .p-toast-message-content .p-icon:not(.p-toast-icon-close-icon) {
+    width: 2rem !important;
+    height: 2rem !important;
+    margin-left: 20px !important;
+
+  }
+  
+  /* spinner.component.css */
+  .image-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
+    text-align: center;
+  }
+  
+  .image-container img {
+    width: 72%;
+    height: 66%;
+    object-fit: cover;
+    border-radius: 0;
+    margin-top: 2rem;
+  }
+  
+  /* 
+  @keyframes shadowAnimation {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(33, 150, 243, 0.7);
+    }
+  } */
+  

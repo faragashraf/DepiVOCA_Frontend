@@ -1,0 +1,44 @@
+<div class="login-container">
+    <div class="login-box">
+        <div class="logo-container">
+            <a href="https://wavz.com.eg/" pTooltip="Ministry Of Communications" tooltipPosition="left"><img
+                    src="../../../assets/imges/logo.png" alt="Logo"></a>
+
+            <div class="vertical-line"></div>
+            <a href="https://wavz.com.eg/" pTooltip="{{wavzToolTip}}" tooltipPosition="right"><img
+                    src="../../../assets/imges/wavz.png" alt="Logo"></a>
+
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="p-fluid">
+
+                <div class="p-field">
+                    <span class="p-float-label">
+                        <input pInputText id="username" pInputText formControlName="username" />
+                        <label htmlFor="username">User Name</label>
+                    </span>
+                </div>
+                <div class="p-field">
+                    <span class="p-float-label">
+                        <input pInputText id="password" type="password" pInputText formControlName="password" />
+                        <label htmlFor="password">Password</label>
+                    </span>
+                </div>
+                <button pButton type="submit" label="Login" [disabled]="!loginForm.valid"></button>
+            </div>
+        </form>
+        <!-- <div class="social-login">
+            <p>Login with</p>
+            <div class="social-buttons">
+                <button pButton type="button" style="margin-right: 1rem;" icon="pi pi-facebook"
+                    (click)="loginWithFacebook()"></button>
+                <button pButton type="button" icon="pi pi-google" (click)="loginWithGoogle()"></button>
+            </div>
+        </div> -->
+        <div class="additional-links">
+            <a href="">Forgot Password?</a>
+            <span> | </span>
+            <a href="">Register</a>
+        </div>
+    </div>
+</div>
