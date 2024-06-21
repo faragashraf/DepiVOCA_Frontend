@@ -12,6 +12,7 @@ import { NavBarComponent } from './shared/components/nav-bar/nav-bar.component';
 import { PrimengModule } from './shared/Modules/primeng.module';
 import { MessageService } from 'primeng/api';
 import { HomeComponent } from './shared/components/home/home.component';
+import { SpinnerService } from './shared/services/spinner.service';
 
 
 @NgModule({
@@ -30,12 +31,10 @@ import { HomeComponent } from './shared/components/home/home.component';
     HttpClientModule,
     PrimengModule
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-  providers: [JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: BasicInterceptorService,
-      multi: true,
-    },MessageService
+  providers: [
+    JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    { provide: HTTP_INTERCEPTORS, useClass: BasicInterceptorService, multi: true, },
+    MessageService,SpinnerService
   ],
   bootstrap: [AppComponent]
 })

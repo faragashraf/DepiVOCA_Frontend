@@ -1,0 +1,47 @@
+<div class="container-main">
+    <div class="row">
+        <div class="widget col-md-3">
+            <app-category-tree></app-category-tree>
+        </div>
+        <div class="widget col-md-8">
+            <!-- ticket-form.component.html -->{{ticketForm.value|json}}
+            <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" style="width: 50%;">
+                <div>
+                    <label for="tkCategoryCd">Category Code:</label>
+                    <input type="number" formControlName="tkCategoryCd" id="tkCategoryCd" class="form-control">
+                </div>
+                <div>
+                    <label for="tkCompSrc">Component Source:</label>
+                    <input type="number" formControlName="tkCompSrc" id="tkCompSrc" class="form-control"
+                        [ngClass]="{'has-error':formErrors.tkCompSrc}" (blur)="logValidationErrors()">
+                    <span class="has-error" *ngIf="formErrors.tkCompSrc">
+                        {{formErrors.tkCompSrc}}
+                    </span>
+                </div>
+                <div>
+                    <label for="tkDetails">Details:</label>
+                    <textarea formControlName="tkDetails" id="tkDetails" class="form-control"
+                        [ngClass]="{'has-error':formErrors.tkDetails}" (blur)="logValidationErrors()"></textarea>
+                    <span class="has-error" *ngIf="formErrors.tkDetails">
+                        {{formErrors.tkDetails}}
+                    </span>
+                </div>
+                <ng-container formArrayName="mandFileds">
+                    <ng-container *ngFor="let mandFiled of mandFileds.controls; let i=index" [formGroupName]="i">
+                        <div>
+                            <label [for]="cdCategoryMandDto[i].mendField"> {{cdCategoryMandDto[i].mendField}}
+                                :</label>
+                            <input type="text" formControlName="_mendField" [id]="cdCategoryMandDto[i].mendField"
+                                class="form-control"  [ngClass]="{'has-error':formErrors._mendField}" (blur)="logValidationErrors()">
+                                <span class="has-error" *ngIf="formErrors._mendField">
+                                    {{formErrors._mendField}}
+                                </span>
+                        </div>
+                    </ng-container>
+                </ng-container>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</div>

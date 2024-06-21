@@ -1,1 +1,11 @@
-<p>category-tree works!</p>
+<div>
+    <p-tree [value]="categoryTree" selectionMode="single" [(selection)]="selectedNode" [filter]="true"
+        filterPlaceholder="Categories Search" scrollHeight="600px" (onNodeSelect)="nodeSelection($event)"
+        (onNodeUnselect)="nodeUnselection($event)">
+        <ng-template let-node pTemplate="default">
+            <b [class.module]="node.children.length==0">
+                {{ node.label }}
+            </b>
+        </ng-template>
+    </p-tree>
+</div>

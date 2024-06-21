@@ -1,0 +1,80 @@
+::ng-deep .p-tree {
+    border: 1px solid #0080ff !important;
+    background: #ffd57b1e !important;
+    color: #495057 !important;
+    padding: 1rem !important;
+    border-radius: 5% !important;
+    box-shadow: 1px 1px 20px 0px rgba(0, 0, 0, 0.342) !important;
+    /* Adding shadow */
+}
+
+::ng-deep .p-tree .p-tree-filter-container {
+    margin-bottom: 1rem;
+}
+
+::ng-deep .p-tree .p-tree-filter-container .p-tree-filter {
+    width: 99% !important;
+    padding-right: 1.75rem !important;
+    align-items: center !important;
+    border-radius: 1px;
+}
+
+::ng-deep .p-tree-empty-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.module {
+    color: #ff8800;
+}
+
+// ::ng-deep .p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler {
+//     // margin-right: 0.5rem !important;
+//     width: 2rem !important;
+//     height: 2rem !important;
+//     color: #000000;
+//     border: 0 none !important;
+//     border-radius: 50% !important;
+//     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s !important;
+//     // margin-left: 0.8rem !important;
+//     display: flex !important;
+//     justify-content: space-around !important;
+//      // transform: rotate(180deg) !important;
+// }
+
+// ::ng-deep.p-tree .p-tree-container .p-treenode .p-treenode-content:hover {
+//     & .p-tree-toggler {
+//         color: #5eff00 !important;
+//     }
+// }
+
+// // ::ng-deep .p-tree .p-treenode-children {
+// //     margin-right: 1rem !important;
+// // }
+
+// ::ng-deep .p-tree-container {
+//     margin: 0 !important;
+//     padding: 5px 0 0 0 !important;
+//     list-style-type: square !important;
+//     overflow: hidden !important;
+// }
+
+// ::ng-deep .p-tree .p-tree-container .p-treenode {
+//     border-radius: 6px !important;
+//     transition: box-shadow 0.2s !important;
+//     padding: 0rem !important;
+//     width: 100%;
+// }
+
+// ::ng-deep .p-tree .p-tree-container .p-treenode .p-treenode-content {
+//     border-radius: 6px !important;
+//     transition: box-shadow 0.2s !important;
+//     padding: 0.5rem 0.25rem !important;
+//     width: fit-content;
+//     padding-left: 20px !important;
+// }
+
+// ::ng-deep.p-treenode-children {
+//     padding: 0 !important;
+// }

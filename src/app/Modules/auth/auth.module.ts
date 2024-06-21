@@ -13,8 +13,8 @@ import { PrimengModule } from '../../shared/Modules/primeng.module';
     LoginComponent
   ],
   imports: [
-    CommonModule,
     AuthRoutingModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

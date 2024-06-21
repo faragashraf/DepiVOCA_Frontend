@@ -1,14 +1,27 @@
-::ng-deep .p-megaMenu {
-    background-color: #f0f0f0 !important; /* Example color */
-}
-::ng-deep .p-component, .p-component * {
+::ng-deep .p-megamenu {
     display: flex !important;
-    background-color: #47ff8e52 ;
-    align-items: center;
-    justify-content: center;
-
+    background-color: #47ff8e52 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: inset 2px 3px 20px 0px rgb(255 0 0 / 35%) !important;
+    border-radius: 10% !important;
+    margin: 0 2rem 0 2rem;
+    padding: 0.75rem  !important;
 }
 
+::ng-deep .p-megamenu .p-megamenu-root-list>.p-menuitem>.p-menuitem-link {
+    padding: 0.75rem 1rem !important;
+    margin: 0 1rem 0 0 !important;
+    color: #495057 !important;
+    border-radius: 35% !important;
+    transition: box-shadow 0.2s !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+}
 
-
-
+::ng-deep .p-megamenu .p-megamenu-root-list>.p-menuitem>.p-menuitem-link:not(.p-disabled):hover {
+    background: #ffffff !important;
+}
+button{
+    border-radius: 20% !important;
+}

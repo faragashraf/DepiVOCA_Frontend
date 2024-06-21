@@ -25,6 +25,8 @@ import { AuthSubjectService } from './Modules/auth/auth-subject.service';
   ]
 })
 export class AppComponent implements OnInit {
+  currentYear: number=0;
+
   spinnerLoading: string = 'Loading ...'
   IndexedDBCompatibility: boolean = false;
   instructionVisible: boolean = false;
@@ -36,7 +38,9 @@ export class AppComponent implements OnInit {
     this.indexDbService.dbName = 'VOCA-AuthDb';
     this.indexDbService.ObjectStoreName = 'AuthStore';
   }
+  
   ngOnInit(): void {
+    this.currentYear = new Date().getFullYear();
     this.authSubjectService.authObject$.subscribe(auth => {
       this.isAuth = auth
     })

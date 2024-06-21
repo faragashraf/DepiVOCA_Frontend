@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class SpinnerService {
-  spinnerLoading$ = new Subject<string>();
+ public spinnerLoading$ = new Subject<string>();
   constructor(private spinner: NgxSpinnerService) { }
   // Show the spinner with a dynamic message
   show(message: string = 'Loading...') {

@@ -7,10 +7,8 @@ const routes: Routes = [
     path: 'Home',
     component: HomeComponent
   },
-  {
-    path: 'Auth',
-    loadChildren: () => import('./Modules/auth/auth.module').then(m => m.AuthModule)
-  }
+  { path: 'Auth', loadChildren: () => import('./Modules/auth/auth.module').then(m => m.AuthModule) },
+  { path: 'Ticket', loadChildren: () => import('./Modules/tickets/tickets.module').then(m => m.TicketsModule) }
 ];
 
 @NgModule({

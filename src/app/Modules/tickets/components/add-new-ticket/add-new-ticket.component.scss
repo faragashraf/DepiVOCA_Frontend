@@ -1,0 +1,17 @@
+/* ticket-form.component.css */
+form div {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: inline-block;
+    width: 150px;
+  }
+  
+  input, textarea, button {
+    margin-left: 10px;
+  }
+
+  .has-error{
+    color: red;
+  }

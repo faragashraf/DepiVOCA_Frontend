@@ -1,13 +1,29 @@
 <ngx-spinner bdOpacity="0.9" bdColor="rgba(255, 255, 255, 0.667)">
-    <div class="image-container" [@shadowAnimation]="shadowState">
-      <img src="assets/imges/logo.png"  alt="Image">
-    </div>
-    <br> <br> <br> <br> <br><br> <br><br><br> <br> <br><br> <br> <br>
-    <p style="font-size: 20px; color: rgb(0, 0, 0)">{{spinnerLoading}}</p>
-  </ngx-spinner>
+  <div class="image-container" [@shadowAnimation]="shadowState">
+    <img src="assets/imges/logo.png" alt="Image">
+  </div>
+  <br> <br> <br> <br> <br><br> <br><br><br> <br> <br><br> <br> <br>
+  <p style="font-size: 20px; color: rgb(0, 0, 0)">{{spinnerLoading}}</p>
+</ngx-spinner>
 
 <app-nav-bar *ngIf="isAuth"></app-nav-bar>
-  
 
-<router-outlet></router-outlet>
- 
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
+
+<footer class="app-footer">
+  <div class="footer-content">
+    <div style="text-align: right;">
+      <img src="assets/imges/wavz.png" width="50px" height="50px" alt="Image">
+    </div>
+    <div class="footer-column support-info">
+      © {{ currentYear }} Wavz. All rights reserved.
+    </div>
+    <div class="footer-column support-info">
+      <p>Support: <a href="mailto:support@Wavz.com.eg">support@Wavz.com.eg</a></p>
+      <p>Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
+      <!-- <p><a href="/support">Visit our support page</a></p> -->
+    </div>
+  </div>
+</footer>

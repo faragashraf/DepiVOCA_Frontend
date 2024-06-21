@@ -3,9 +3,89 @@
 @import "~primeng/resources/themes/saga-blue/theme.css";
 /* PrimeNG Core CSS */
 @import "~primeng/resources/primeng.min.css";
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-/* Custom CSS */
-body {
-  font-family: Arial, sans-serif;
-  height: 15rem;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Ensure the content area grows to push the footer to the bottom */
+ body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  margin: 0 auto;      /* Center the container horizontally */
+  margin-top: .1rem;
+  width: 100% ;
+  height: 85vh;
+  background-color: #ffffff; /* Optional background color */
+  padding: 0 3rem 0 3rem ;             /* Optional padding */
+  border: 1px solid #ffffff;    /* Optional border */
+  box-sizing: border-box;    /* Ensures padding and border are included in the width */
+  min-height: 80vh;
+}
+
+.container-main{
+  padding: 1rem 0rem 1rem 0;
+  border-radius: 10px !important;
+  box-shadow: 1px 1px 20px 0px rgba(0, 0, 0, 0.342) !important; /* Adding shadow */
+  min-height: 80vh;
+}
+.widget{
+  padding: 1rem ;
+  margin-left: 2%;
+  border-radius: 10px !important;
+  box-shadow: 1px 1px 20px 0px rgba(0, 0, 0, 0.342) !important; /* Adding shadow */
+  min-height: 80vh;
+}
+/* Footer styling */
+.app-footer {
+  background-color: #333;
+  color: #fff;
+  padding: 1em 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-column {
+  flex: 1;
+  text-align: left;
+}
+
+.support-info {
+  text-align: left;
+}
+
+.support-info a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.support-info a:hover {
+  text-decoration: underline;
 }
