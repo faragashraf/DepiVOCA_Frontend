@@ -48,8 +48,9 @@ export class NavBarComponent implements OnInit {
         items: [
           [
             {
-              label: 'Tickets',
-              items: [{ label: 'Add New Ticket', routerLink: 'Ticket/AddNewTicket' }, { label: 'Video 1.2' }]
+              label: '',
+              items: [{ label: 'Add New Ticket', routerLink: 'Ticket/AddNewTicket' },
+              { label: 'New Window' }]
             }
           ]
         ]
@@ -60,7 +61,9 @@ export class NavBarComponent implements OnInit {
         items: [
           [
             {
-              items: [{ label: 'Add New Ticket', routerLink: 'Ticket/AddNewTicket' }, { label: 'Video 1.2' }]
+              items: [
+                { label: 'Home', routerLink: 'Home' },
+              ]
             }
           ]
         ]

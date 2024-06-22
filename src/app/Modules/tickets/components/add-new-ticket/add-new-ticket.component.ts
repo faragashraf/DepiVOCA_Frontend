@@ -3,7 +3,7 @@ import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { MsgsService } from 'src/app/shared/services/msgs.service';
 import { TreeNode } from 'primeng/api';
 import { VOCAController, TicketRequestDto, CdCategoryMandDto, CdmendDto, CdmendDtoIEnumerableCommonResponse, CdCategoryMandDtoIEnumerableCommonResponse } from '../../services/Tickets.service';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { IndexDbService } from 'src/app/shared/services/index-db.service';
 import { forkJoin } from 'rxjs';
 
@@ -66,8 +66,7 @@ export class AddNewTicketComponent implements OnInit {
   ]
 
   returnFormErrors(key: string) {
-    const error = this.formErrors?.find(f => f.key == key)?.value
-    return error
+    return this.formErrors?.find(f => f.key == key)?.value
   }
 
   logValidationErrors(group: FormGroup = this.ticketForm): void {
@@ -88,7 +87,7 @@ export class AddNewTicketComponent implements OnInit {
           if (errorKey) {
             this.formErrors.map(m => {
               if (m.key == key) {
-                m.value += m.value.length > 0 ? ' - ' : '' + messages_X?.find(f => f.key == errorKey)?.value
+                m.value += (m.value.length > 0 ? ' - ' : '') + messages_X?.find(f => f.key == errorKey)?.value
               }
             })
           }
@@ -177,13 +176,16 @@ export class AddNewTicketComponent implements OnInit {
   returnFieldType(field: string): string {
     return <string>this.cdmendDto.find(f => f.cdmendTxt == field)?.cdmendType
   }
+  filedIsRequired(field: string): boolean {
+    return <boolean>this.cdmendDto.find(f => f.cdmendTxt == field)?.required
+  }
 
   addFormArrayWithValidators(metaFiled: string): void {
     let _mandData = this.cdmendDto.find(f => f.cdmendTxt == metaFiled)
 
     // Get init Form Group with Dynamic Control
     const NestedForm = this.fb.group({
-      [metaFiled]: ['', Validators.required]
+      [metaFiled]: ['']
     });
 
     const nestedControl = NestedForm.get(metaFiled);
@@ -201,9 +203,14 @@ export class AddNewTicketComponent implements OnInit {
     this.formErrors.push({ key: <string>_mandData?.cdmendTxt, value: '' });
 
     const _validators: _Validators[] = []
-    _validators.push({ key: 'required', value: 'Please Enter ' + fieldName })
-    if (<number>_mandData?.cdmendLenght > 0) {
-      _validators.push({ key: 'minlength', value: `${fieldName} must be not less than ${_mandData?.cdmendLenght} characters` })
+    if (_mandData?.required) {
+      _validators.push({ key: 'required', value: `Please Enter ${fieldName}` })
+    }
+    if (<number>_mandData?.minxLenght > 0) {
+      _validators.push({ key: 'minlength', value: `${fieldName} must be not less than ${_mandData?.minxLenght} characters` })
+    }
+    if (<number>_mandData?.maxLenght > 0) {
+      _validators.push({ key: 'maxlength', value: `${fieldName} must be not greater than ${_mandData?.maxLenght} characters` })
     }
 
     this.validationMessages.push({
@@ -216,9 +223,15 @@ export class AddNewTicketComponent implements OnInit {
   private setValidators(_mandData: CdmendDto | undefined, control: AbstractControl) {
     // Set validators dynamically
     const currentValidators = control?.validator ? [control.validator] : [];
-    let newValidators: any[] = []
-    if (Number(_mandData?.cdmendLenght) > 0) {
-      newValidators.push(Validators.minLength(Number(_mandData?.cdmendLenght)))
+    let newValidators: ValidatorFn[] = []
+    if (_mandData?.required) {
+      newValidators.push(Validators.required)
+    }
+    if (Number(_mandData?.minxLenght) > 0) {
+      newValidators.push(Validators.minLength(Number(_mandData?.minxLenght)))
+    }
+    if (Number(_mandData?.maxLenght) > 0) {
+      newValidators.push(Validators.maxLength(Number(_mandData?.maxLenght)))
     }
     control.setValidators([...currentValidators, ...newValidators]);
     control.updateValueAndValidity();

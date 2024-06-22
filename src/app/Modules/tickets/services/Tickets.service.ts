@@ -390,7 +390,14 @@ export interface CdmendDto {
     cdmendTxt: string | undefined;
     cdmendTbl: string | undefined;
     cdmendDatatype: string | undefined;
-    cdmendLenght: number | undefined;
+    required: boolean ;
+    requiredTrue: boolean | undefined;
+    email: boolean | undefined;
+    pattern: boolean | undefined;
+    min: number | undefined;
+    max: number | undefined;
+    minxLenght: number | undefined;
+    maxLenght: number | undefined;
     cdmendmask: string | undefined;
     cdmendStat: boolean;
 }

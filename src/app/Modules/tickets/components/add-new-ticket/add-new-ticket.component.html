@@ -7,14 +7,13 @@
             <!-- ticket-form.component.html -->
             <!-- {{ticketForm.value|json}} -->
             <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
-
                 <div formArrayName="mandFileds" class="form-array">
                     <div *ngFor="let mandFiled of mandFileds.controls; let i=index" [formGroupName]="i">
                         <div class="form-group">
                             <label [for]="filteredCategoryMand[i].mendField"
                                 [ngClass]="{'alert-danger':returnFormErrors(filteredCategoryMand[i].mendField)}">
                                 {{filteredCategoryMand[i].mendField}}
-                                : <span style="color: red;">*</span></label>
+                                : <span style="color: red;" *ngIf="filedIsRequired(filteredCategoryMand[i].mendField)">*</span></label>
                             <!------------------------------------------------------------------------ InputText ----------------------------------------------------------------------->
                             <input type="text" [formControlName]="filteredCategoryMand[i].mendField"
                                 *ngIf="returnFieldType(filteredCategoryMand[i].mendField)=='InputText'"
@@ -31,7 +30,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div hidden="true">
                     <label for="tkCategoryCd">Category Code: </label>
                     <input type="text" formControlName="tkCategoryCd" id="tkCategoryCd" class="form-control">

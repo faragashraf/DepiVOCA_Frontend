@@ -42,6 +42,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { OverlayModule } from 'primeng/overlay';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MenuModule } from 'primeng/menu';
+import { ChartModule } from 'primeng/chart';
+
 
 const PrimeNg = [
   CommonModule,
@@ -87,7 +89,8 @@ const PrimeNg = [
   OverlayModule,
   ConfirmDialogModule ,
   MegaMenuModule ,
-  MenuModule
+  MenuModule,
+  ChartModule
 ]
 @NgModule({
   declarations: [],
