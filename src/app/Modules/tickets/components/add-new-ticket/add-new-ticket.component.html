@@ -1,90 +1,65 @@
 <div class="container-main">
     <div class="row">
         <div class="widget col-md-3">
-            <app-category-tree></app-category-tree>
+            <app-category-tree (dataEvent)="receiveData($event)"></app-category-tree>
         </div>
-        <div class="widget col-md-8">
+        <div class="widget col-md-8" [ngClass]="{ 'disabled-div': isDivDisabled }">
             <!-- ticket-form.component.html -->
             <!-- {{ticketForm.value|json}} -->
             <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
-                <div>
-                    <label for="tkCategoryCd">Category Code:</label>
-                    <input type="number" formControlName="tkCategoryCd" id="tkCategoryCd" class="form-control">
+
+                <div formArrayName="mandFileds" class="form-array">
+                    <div *ngFor="let mandFiled of mandFileds.controls; let i=index" [formGroupName]="i">
+                        <div class="form-group">
+                            <label [for]="filteredCategoryMand[i].mendField"
+                                [ngClass]="{'alert-danger':returnFormErrors(filteredCategoryMand[i].mendField)}">
+                                {{filteredCategoryMand[i].mendField}}
+                                : <span style="color: red;">*</span></label>
+                            <!------------------------------------------------------------------------ InputText ----------------------------------------------------------------------->
+                            <input type="text" [formControlName]="filteredCategoryMand[i].mendField"
+                                *ngIf="returnFieldType(filteredCategoryMand[i].mendField)=='InputText'"
+                                [id]="filteredCategoryMand[i].mendField" class="form-control"
+                                (blur)="logValidationErrors()">
+                            <!------------------------------------------------------------------------ Textarea ----------------------------------------------------------------------->
+                            <textarea type="text" [formControlName]="filteredCategoryMand[i].mendField"
+                                *ngIf="returnFieldType(filteredCategoryMand[i].mendField)=='Textarea'"
+                                [id]="filteredCategoryMand[i].mendField" class="form-control" rows="7" cols="80"
+                                (blur)="logValidationErrors()"></textarea>
+                            <span class="alert-danger" *ngIf="returnFormErrors(filteredCategoryMand[i].mendField)">
+                                {{returnFormErrors(filteredCategoryMand[i].mendField)}}
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label for="tkCompSrc">Component Source:</label>
-                    <input type="number" formControlName="tkCompSrc" id="tkCompSrc" class="form-control"
-                        [ngClass]="{'has-error':returnFormErrors('tkCompSrc')}" (blur)="logValidationErrors()">
-                    <span class="has-error" *ngIf="returnFormErrors('tkCompSrc')">
+
+                <div hidden="true">
+                    <label for="tkCategoryCd">Category Code: </label>
+                    <input type="text" formControlName="tkCategoryCd" id="tkCategoryCd" class="form-control">
+                </div>
+                <div hidden="true">
+                    <label for="tkCompSrc" [ngClass]="{'alert-danger':returnFormErrors('tkCompSrc')}">Component Source:
+                        <span style="color: red;">*</span></label>
+                    <input type="text" formControlName="tkCompSrc" id="tkCompSrc" class="form-control"
+                        (blur)="logValidationErrors()">
+                    <span class="alert-danger" *ngIf="returnFormErrors('tkCompSrc')">
                         {{returnFormErrors('tkCompSrc')}}
                     </span>
                 </div>
                 <div>
-                    <label for="tkDetails">Details:</label>
-                    <textarea formControlName="tkDetails" id="tkDetails" class="form-control"
-                        [ngClass]="{'has-error':returnFormErrors('tkDetails')}" rows="7" cols="80"
+                    <label for="tkDetails" [ngClass]="{'alert-danger':returnFormErrors('tkDetails')}">Details: <span
+                            style="color: red;">*</span></label>
+                    <textarea formControlName="tkDetails" id="tkDetails" class="form-control" rows="7" cols="80"
                         (blur)="logValidationErrors()"></textarea>
-                    <span class="has-error" *ngIf="returnFormErrors('tkDetails')">
+                    <span class="alert-danger" *ngIf="returnFormErrors('tkDetails')">
                         {{returnFormErrors('tkDetails')}}
                     </span>
                 </div>
 
-<!-- 
-                <div formArrayName="mandFileds" class="form-array">
-                    <div class="form-group">
-                        <label> test
-                            :</label>
-                        <input type="text" [formControlName]="1" id="1" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label> test
-                            :</label>
-                        <input type="text" [formControlName]="1" id="1" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label> test
-                            :</label>
-                        <input type="text" [formControlName]="1" id="1" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label> test
-                            :</label>
-                        <input type="text" [formControlName]="1" id="1" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label> test
-                            :</label>
-                        <input type="text" [formControlName]="1" id="1" class="form-control">
-                    </div>
-                </div>
-
- -->
-
-
-
-
-
-                <div formArrayName="mandFileds" class="form-array">
-                    <div *ngFor="let mandFiled of mandFileds.controls; let i=index"  [formGroupName]="i">
-                        <div class="form-group">
-                            <label [for]="cdCategoryMandDto[i].mendField"> {{cdCategoryMandDto[i].mendField}}
-                                :</label>
-                            <input type="text" [formControlName]="cdCategoryMandDto[i].mendField"
-                                [id]="cdCategoryMandDto[i].mendField" class="form-control"
-                                [ngClass]="{'has-error':returnFormErrors(cdCategoryMandDto[i].mendField)}"
-                                (blur)="logValidationErrors()">
-                            <span class="has-error" *ngIf="returnFormErrors(cdCategoryMandDto[i].mendField)">
-                                {{returnFormErrors(cdCategoryMandDto[i].mendField)}}
-                            </span>
-                           
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success" [disabled]="ticketForm.invalid">Submit</button>
                 <br>
-                <hr>{{formErrors|json}}
+                <!-- <hr>{{formErrors|json}}
                 <br>
-                <hr>{{validationMessages|json}}
+                <hr>{{validationMessages|json}} -->
             </form>
         </div>
     </div>

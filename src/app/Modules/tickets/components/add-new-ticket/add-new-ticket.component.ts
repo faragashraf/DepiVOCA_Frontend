@@ -3,18 +3,18 @@ import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { MsgsService } from 'src/app/shared/services/msgs.service';
 import { TreeNode } from 'primeng/api';
 import { VOCAController, TicketRequestDto, CdCategoryMandDto, CdmendDto, CdmendDtoIEnumerableCommonResponse, CdCategoryMandDtoIEnumerableCommonResponse } from '../../services/Tickets.service';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { IndexDbService } from 'src/app/shared/services/index-db.service';
 import { forkJoin } from 'rxjs';
 
-interface Validator {
+interface _Validators {
   key: string;
   value: string;
 }
 
 interface ValidationMessage {
   key: string;
-  validators: Validator[];
+  validators: _Validators[];
 }
 
 interface formErrors {
@@ -27,9 +27,11 @@ interface formErrors {
   styleUrls: ['./add-new-ticket.component.scss']
 })
 export class AddNewTicketComponent implements OnInit {
+  isDivDisabled: boolean = true;
   categoryTree: TreeNode[] = [];
   ticketForm!: FormGroup;
   cdCategoryMandDto: CdCategoryMandDto[] = []
+  filteredCategoryMand: CdCategoryMandDto[] = []
   cdmendDto: CdmendDto[] = []
 
 
@@ -113,19 +115,22 @@ export class AddNewTicketComponent implements OnInit {
     // this.indexDbService.ObjectStoreName = 'MandatoryStore'; // Table Name
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit() {
+    this.initForm()
+    this.GetData()
 
-    await this.initForm()
-    await this.GetData()
-
-    await this.ticketForm.valueChanges.subscribe((data) => {
+    this.ticketForm.valueChanges.subscribe((data) => {
       this.logValidationErrors();
+      if (this.ticketForm.get('tkCategoryCd')?.invalid)
+        this.isDivDisabled = true;
+      else
+        this.isDivDisabled = false;
     })
   }
   initForm() {
     this.ticketForm = this.fb.group({
       tkCategoryCd: [null, Validators.required],
-      tkCompSrc: [null, Validators.required],
+      tkCompSrc: ['1', Validators.required],
       tkDetails: ['', [Validators.required, Validators.minLength(10)]],
       mandFileds: this.fb.array([])
     });
@@ -143,10 +148,6 @@ export class AddNewTicketComponent implements OnInit {
             this.cdCategoryMandDto = res[0].data as CdCategoryMandDto[]
 
             this.cdmendDto = res[1].data as CdmendDto[]
-
-            res[0].data?.forEach(mandatory => {
-              this.addFormArrayWithValidators(mandatory.mendField)
-            })
           }
           else {
             let errors = "";
@@ -170,37 +171,60 @@ export class AddNewTicketComponent implements OnInit {
   }
 
   get mandFileds(): FormArray {
-    return this.ticketForm.controls['mandFileds'] as FormArray;
+    return <FormArray>this.ticketForm.controls['mandFileds'];
+  }
+
+  returnFieldType(field: string): string {
+    return <string>this.cdmendDto.find(f => f.cdmendTxt == field)?.cdmendType
   }
 
   addFormArrayWithValidators(metaFiled: string): void {
     let _mandData = this.cdmendDto.find(f => f.cdmendTxt == metaFiled)
-    this.formErrors.push({ key: metaFiled, value: '' })
-    this.validationMessages.push({
-      key: metaFiled, validators: [
-        { key: 'required', value: 'Please Enter ' + metaFiled },
-        { key: 'minlength', value: `${metaFiled} must be greater than ${_mandData?.cdmendLenght} characters` }
-      ]
-    })
 
-
+    // Get init Form Group with Dynamic Control
     const NestedForm = this.fb.group({
       [metaFiled]: ['', Validators.required]
     });
 
-    // Set validators dynamically
     const nestedControl = NestedForm.get(metaFiled);
-    const currentValidators = nestedControl?.validator ? [nestedControl.validator] : [];
     if (nestedControl) {
-      nestedControl.setValidators([...currentValidators, Validators.minLength(Number(_mandData?.cdmendLenght))]);
-      nestedControl.updateValueAndValidity(); 
+      this.setErrorsObjects(_mandData, nestedControl);
     }
-
     this.mandFileds.push(NestedForm);
 
   }
 
-  setValidators(controlName: string) {
+  private setErrorsObjects(_mandData: CdmendDto | undefined, control: AbstractControl) {
+
+    const fieldName = <string>_mandData?.cdmendTxt
+
+    this.formErrors.push({ key: <string>_mandData?.cdmendTxt, value: '' });
+
+    const _validators: _Validators[] = []
+    _validators.push({ key: 'required', value: 'Please Enter ' + fieldName })
+    if (<number>_mandData?.cdmendLenght > 0) {
+      _validators.push({ key: 'minlength', value: `${fieldName} must be not less than ${_mandData?.cdmendLenght} characters` })
+    }
+
+    this.validationMessages.push({
+      key: fieldName, validators: _validators
+    });
+
+    this.setValidators(_mandData, control);
+  }
+
+  private setValidators(_mandData: CdmendDto | undefined, control: AbstractControl) {
+    // Set validators dynamically
+    const currentValidators = control?.validator ? [control.validator] : [];
+    let newValidators: any[] = []
+    if (Number(_mandData?.cdmendLenght) > 0) {
+      newValidators.push(Validators.minLength(Number(_mandData?.cdmendLenght)))
+    }
+    control.setValidators([...currentValidators, ...newValidators]);
+    control.updateValueAndValidity();
+  }
+
+  setAllValidators(controlName: string) {
     const frm = <FormArray>this.mandFileds.get(controlName)
     frm.controls?.forEach((f: AbstractControl) => {
       f.setValidators(Validators.required);
@@ -228,5 +252,15 @@ export class AddNewTicketComponent implements OnInit {
       console.log(ticketRequest);
       // Handle the form submission
     }
+  }
+  receiveData(data: string) {
+    this.mandFileds.clear()      // Clear All For Array
+    this.ticketForm.get('tkCategoryCd')?.patchValue(data);
+
+    this.filteredCategoryMand = this.cdCategoryMandDto.filter(f => f.mendCategory == Number(data))
+
+    this.filteredCategoryMand.forEach(mandatory => {
+      this.addFormArrayWithValidators(mandatory.mendField)
+    })
   }
 }

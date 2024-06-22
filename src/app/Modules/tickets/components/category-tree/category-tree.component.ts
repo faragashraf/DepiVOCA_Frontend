@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { MsgsService } from 'src/app/shared/services/msgs.service';
@@ -10,6 +10,8 @@ import { VOCAController, CdcategoryDto } from '../../services/Tickets.service';
   styleUrls: ['./category-tree.component.scss']
 })
 export class CategoryTreeComponent implements OnInit {
+  @Output() dataEvent = new EventEmitter<string>();
+  
   categoryTree: TreeNode[] = [];
   selectedNode: TreeNode = {} as TreeNode
 
@@ -74,11 +76,13 @@ export class CategoryTreeComponent implements OnInit {
   }
 
   nodeSelection(event: any) {
+    this.dataEvent.emit(event.node.key);
     //this.selectedNode = event.node
     //  this.setIds(event.node.label)
   }
 
   nodeUnselection(event: any) {
+    this.dataEvent.emit('');
     // this.setIds(event.node.label)
   }
 
