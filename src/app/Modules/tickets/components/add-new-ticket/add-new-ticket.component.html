@@ -4,8 +4,9 @@
             <app-category-tree></app-category-tree>
         </div>
         <div class="widget col-md-8">
-            <!-- ticket-form.component.html -->{{ticketForm.value|json}}
-            <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" style="width: 50%;">
+            <!-- ticket-form.component.html -->
+            <!-- {{ticketForm.value|json}} -->
+            <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
                 <div>
                     <label for="tkCategoryCd">Category Code:</label>
                     <input type="number" formControlName="tkCategoryCd" id="tkCategoryCd" class="form-control">
@@ -13,33 +14,77 @@
                 <div>
                     <label for="tkCompSrc">Component Source:</label>
                     <input type="number" formControlName="tkCompSrc" id="tkCompSrc" class="form-control"
-                        [ngClass]="{'has-error':formErrors.tkCompSrc}" (blur)="logValidationErrors()">
-                    <span class="has-error" *ngIf="formErrors.tkCompSrc">
-                        {{formErrors.tkCompSrc}}
+                        [ngClass]="{'has-error':returnFormErrors('tkCompSrc')}" (blur)="logValidationErrors()">
+                    <span class="has-error" *ngIf="returnFormErrors('tkCompSrc')">
+                        {{returnFormErrors('tkCompSrc')}}
                     </span>
                 </div>
                 <div>
                     <label for="tkDetails">Details:</label>
                     <textarea formControlName="tkDetails" id="tkDetails" class="form-control"
-                        [ngClass]="{'has-error':formErrors.tkDetails}" (blur)="logValidationErrors()"></textarea>
-                    <span class="has-error" *ngIf="formErrors.tkDetails">
-                        {{formErrors.tkDetails}}
+                        [ngClass]="{'has-error':returnFormErrors('tkDetails')}" rows="7" cols="80"
+                        (blur)="logValidationErrors()"></textarea>
+                    <span class="has-error" *ngIf="returnFormErrors('tkDetails')">
+                        {{returnFormErrors('tkDetails')}}
                     </span>
                 </div>
-                <ng-container formArrayName="mandFileds">
-                    <ng-container *ngFor="let mandFiled of mandFileds.controls; let i=index" [formGroupName]="i">
-                        <div>
+
+<!-- 
+                <div formArrayName="mandFileds" class="form-array">
+                    <div class="form-group">
+                        <label> test
+                            :</label>
+                        <input type="text" [formControlName]="1" id="1" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label> test
+                            :</label>
+                        <input type="text" [formControlName]="1" id="1" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label> test
+                            :</label>
+                        <input type="text" [formControlName]="1" id="1" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label> test
+                            :</label>
+                        <input type="text" [formControlName]="1" id="1" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label> test
+                            :</label>
+                        <input type="text" [formControlName]="1" id="1" class="form-control">
+                    </div>
+                </div>
+
+ -->
+
+
+
+
+
+                <div formArrayName="mandFileds" class="form-array">
+                    <div *ngFor="let mandFiled of mandFileds.controls; let i=index"  [formGroupName]="i">
+                        <div class="form-group">
                             <label [for]="cdCategoryMandDto[i].mendField"> {{cdCategoryMandDto[i].mendField}}
                                 :</label>
-                            <input type="text" formControlName="_mendField" [id]="cdCategoryMandDto[i].mendField"
-                                class="form-control"  [ngClass]="{'has-error':formErrors._mendField}" (blur)="logValidationErrors()">
-                                <span class="has-error" *ngIf="formErrors._mendField">
-                                    {{formErrors._mendField}}
-                                </span>
+                            <input type="text" [formControlName]="cdCategoryMandDto[i].mendField"
+                                [id]="cdCategoryMandDto[i].mendField" class="form-control"
+                                [ngClass]="{'has-error':returnFormErrors(cdCategoryMandDto[i].mendField)}"
+                                (blur)="logValidationErrors()">
+                            <span class="has-error" *ngIf="returnFormErrors(cdCategoryMandDto[i].mendField)">
+                                {{returnFormErrors(cdCategoryMandDto[i].mendField)}}
+                            </span>
+                           
                         </div>
-                    </ng-container>
-                </ng-container>
-                <button type="submit">Submit</button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+                <br>
+                <hr>{{formErrors|json}}
+                <br>
+                <hr>{{validationMessages|json}}
             </form>
         </div>
     </div>

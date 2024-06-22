@@ -1,17 +1,42 @@
 /* ticket-form.component.css */
+form  {
+  margin-bottom: 15px;
+  width: 95%;
+}
 form div {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: inline-block;
-    width: 150px;
-  }
-  
-  input, textarea, button {
-    margin-left: 10px;
-  }
+  margin-bottom: 15px;
+}
 
-  .has-error{
-    color: red;
-  }
+label {
+  display: inline-block;
+  width: 10rem;
+  color: black;
+  font-size: larger;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+input,
+textarea,
+button {
+  margin-left: 1rem;
+}
+
+.has-error {
+  color: red;
+}
+
+.form-array {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 70%;
+}
+
+.form-array input {
+  margin: 5px;   /* Adds some space between the inputs */
+  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+  width: 30rem;
+}
+
+.form-group {
+  margin-left: 1rem;
+}
