@@ -36,3 +36,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
       formControlName="dropdown1" 
       placeholder="Select Option 1">
     </p-dropdown>
+ </form>
+</div>
