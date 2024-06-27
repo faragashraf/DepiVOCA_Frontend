@@ -16,7 +16,10 @@ interface ValidationMessage {
   key: string;
   validators: _Validators[];
 }
-
+interface selection {
+  key: string;
+  name: string;
+}
 interface formErrors {
   key: string,
   value: string
@@ -33,7 +36,6 @@ export class AddNewTicketComponent implements OnInit {
   cdCategoryMandDto: CdCategoryMandDto[] = []
   filteredCategoryMand: CdCategoryMandDto[] = []
   cdmendDto: CdmendDto[] = []
-
 
   validationMessages: ValidationMessage[] = [
     {
@@ -192,8 +194,15 @@ export class AddNewTicketComponent implements OnInit {
     if (nestedControl) {
       this.setErrorsObjects(_mandData, nestedControl);
     }
+      // if (_mandData?.cdmendType == 'RadioButton' || _mandData?.cdmendType == 'Dropdown') {
+      //   this.implementControlSelection(_mandData.cdmendTbl)
+      // }
     this.mandFileds.push(NestedForm);
+  }
 
+  implementControlSelection(filedName: any): selection[] {
+    let _mandData = this.cdmendDto.find(f => f.cdmendTxt == filedName)
+    return JSON.parse(<string>_mandData?.cdmendTbl);
   }
 
   private setErrorsObjects(_mandData: CdmendDto | undefined, control: AbstractControl) {

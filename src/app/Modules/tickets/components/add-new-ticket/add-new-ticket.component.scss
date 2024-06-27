@@ -4,16 +4,19 @@ form {
   width: 95%;
 }
 
-form div {
-  margin-bottom: 15px;
-}
 
 label {
-  display: inline-block;
+  display: flex ;
   width: 12rem;
+  min-width: 12rem;
   color: black;
   font-size: larger;
   font-family: 'Times New Roman', Times, serif;
+  margin-left: .5rem;
+}
+.radioButton{
+  display: flex;
+  align-items: center;
 }
 
 input,
@@ -35,7 +38,7 @@ button {
 .form-array {
   display: flex;
   flex-wrap: wrap;
-  min-width: 70%;
+  min-width: 80%;
 }
 
 .form-array input {
@@ -43,9 +46,11 @@ button {
   /* Adds some space between the inputs */
   box-sizing: border-box;
   /* Ensures padding and border are included in the element's total width and height */
-  width: 30rem;
+  width: 27.25rem;
 }
 
 .form-group {
   margin-left: 1rem;
+  margin-bottom: 2rem;
+  min-width: 30.5rem;
 }

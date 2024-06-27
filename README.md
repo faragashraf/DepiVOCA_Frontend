@@ -25,3 +25,14 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Discription
+```html
+
+<div style="margin: 20px;">
+  <form [formGroup]="form">
+    <p-dropdown 
+      [options]="options1" 
+      formControlName="dropdown1" 
+      placeholder="Select Option 1">
+    </p-dropdown>
