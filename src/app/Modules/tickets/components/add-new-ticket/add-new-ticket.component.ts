@@ -48,7 +48,7 @@ export class AddNewTicketComponent implements OnInit {
     },
     {
       key: 'tkDetails',
-      validators: [{ key: 'required', value: 'Please Enter Details' }, { key: 'minlength', value: 'Details must be greater than 20 characters' }]
+      validators: [{ key: 'required', value: 'Please Enter Details' }, { key: 'minlength', value: 'Details must be greater than 10 characters' }]
     }
   ];
 
@@ -221,7 +221,12 @@ export class AddNewTicketComponent implements OnInit {
     if (<number>_mandData?.maxLenght > 0) {
       _validators.push({ key: 'maxlength', value: `${fieldName} must be not greater than ${_mandData?.maxLenght} characters` })
     }
-
+    if (<number>_mandData?.min > 0) {
+      _validators.push({ key: 'min', value: `${fieldName} must be greater than or equal ${_mandData?.min} ` })
+    }
+    if (<number>_mandData?.max > 0) {
+      _validators.push({ key: 'max', value: `${fieldName} must be less than or equal ${_mandData?.max} ` })
+    }
     this.validationMessages.push({
       key: fieldName, validators: _validators
     });
@@ -241,6 +246,12 @@ export class AddNewTicketComponent implements OnInit {
     }
     if (Number(_mandData?.maxLenght) > 0) {
       newValidators.push(Validators.maxLength(Number(_mandData?.maxLenght)))
+    }
+    if (Number(_mandData?.min) > 0) {
+      newValidators.push(Validators.min(Number(_mandData?.min)))
+    }
+    if (Number(_mandData?.max) > 0) {
+      newValidators.push(Validators.max(Number(_mandData?.max)))
     }
     control.setValidators([...currentValidators, ...newValidators]);
     control.updateValueAndValidity();
