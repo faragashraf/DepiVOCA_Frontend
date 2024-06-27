@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-us" datatype="plaintext" original="ng2.template">
+    <body>
+    <trans-unit id="8559741699344080422" datatype="html">
+        <source>Signing In ...</source>
+          <target>جاري تسجيل الدخول ...</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Modules/auth/login/login.component.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1910114220697395611" datatype="html">
+        <source> © <x id="INTERPOLATION" equiv-text="{{ currentYear }}"/> Wavz. All rights reserved. </source>
+        <target>ويفز</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">20,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3643606598991416718" datatype="html">
+        <source>Loading ...</source>
+           <target>تحميل</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

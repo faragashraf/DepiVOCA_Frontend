@@ -27,7 +27,7 @@ import { AuthSubjectService } from './Modules/auth/auth-subject.service';
 export class AppComponent implements OnInit {
   currentYear: number=0;
 
-  spinnerLoading: string = 'Loading ...'
+  spinnerLoading: string = $localize`Loading ...`
   IndexedDBCompatibility: boolean = false;
   instructionVisible: boolean = false;
   isAuth: boolean = false;

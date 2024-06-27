@@ -34,14 +34,14 @@ export class LoginComponent implements OnInit {
       // this.indexDbService.createObjectStore(this.indexDbService.ObjectStoreName)
     })
     const { username, password } = this.loginForm.value;
-    this.spinnerService.show('Signing In ...')
+    this.spinnerService.show($localize`Signing In ...`)
     if (this.loginForm.valid && username == 'test' && password == 'test') {
       setTimeout(() => {
         this.indexDbService.add({ id: 'AuthObject', object: { name: 'Ashraf', id: '1' } })
         localStorage.setItem('VOCAToken', 'token')
         this.spinnerService.hide();
         this.authSubjectService.authObject$.next(true)
-        this.router.navigate(['/Home']);
+        this.router.navigate(['/']);
       }, 2000);
     }
     else {

@@ -4,7 +4,7 @@ import { HomeComponent } from './shared/components/home/home.component';
 
 const routes: Routes = [
   {
-    path: 'Home',
+    path: '',
     component: HomeComponent
   },
   { path: 'Auth', loadChildren: () => import('./Modules/auth/auth.module').then(m => m.AuthModule) },

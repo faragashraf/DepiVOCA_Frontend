@@ -13,6 +13,7 @@ import { PrimengModule } from './shared/Modules/primeng.module';
 import { MessageService } from 'primeng/api';
 import { HomeComponent } from './shared/components/home/home.component';
 import { SpinnerService } from './shared/services/spinner.service';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import { SpinnerService } from './shared/services/spinner.service';
     PrimengModule
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [
-    JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },{ provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: BasicInterceptorService, multi: true, },
     MessageService,SpinnerService
   ],
