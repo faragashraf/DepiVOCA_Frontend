@@ -6,13 +6,14 @@ form {
 
 
 label {
+  padding: 0  .5rem 0 .5rem;
   display: flex ;
   width: 12rem;
   min-width: 12rem;
   color: black;
   font-size: larger;
   font-family: 'Times New Roman', Times, serif;
-  margin-left: .5rem;
+  // margin-left: .5rem;
 }
 .radioButton{
   display: flex;
@@ -22,7 +23,7 @@ label {
 input,
 textarea,
 button {
-  margin-left: 1rem;
+  margin: 1rem;
 }
 
 .disabled-div {
@@ -50,7 +51,7 @@ button {
 }
 
 .form-group {
-  margin-left: 1rem;
+  margin: .5rem;
   margin-bottom: 2rem;
   min-width: 30.5rem;
 }

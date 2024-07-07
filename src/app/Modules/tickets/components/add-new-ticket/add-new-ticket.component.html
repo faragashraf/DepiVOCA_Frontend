@@ -5,7 +5,7 @@
         </div>
         <div class="widget col-md-8" [ngClass]="{ 'disabled-div': isDivDisabled }">
             <!-- ticket-form.component.html -->
-            {{ticketForm.value|json}}
+            <!-- {{ticketForm.value|json}} -->
             <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
                 <div formArrayName="mandFileds" class="form-array">
                     <div *ngFor="let mandFiled of mandFileds.controls; let i=index" [formGroupName]="i">
@@ -20,6 +20,11 @@
                                 *ngIf="returnFieldType(filteredCategoryMand[i].mendField)=='InputText'"
                                 [id]="filteredCategoryMand[i].mendField" class="form-control"
                                 (blur)="logValidationErrors()">
+                            <!------------------------------------------------------------------------ InputText-integeronly ----------------------------------------------------------------------->
+                            <input type="text" pKeyFilter="int" [formControlName]="filteredCategoryMand[i].mendField"
+                                *ngIf="returnFieldType(filteredCategoryMand[i].mendField)=='InputText-integeronly'"
+                                [id]="filteredCategoryMand[i].mendField" class="form-control"
+                                (blur)="logValidationErrors()">
                             <!------------------------------------------------------------------------ Textarea  ----------------------------------------------------------------------->
                             <textarea type="text" [formControlName]="filteredCategoryMand[i].mendField"
                                 *ngIf="returnFieldType(filteredCategoryMand[i].mendField)=='Textarea'"
@@ -28,17 +33,19 @@
                             <!------------------------------------------------------------------------ RadioButton  ----------------------------------------------------------------------->
                             <div *ngIf="returnFieldType(filteredCategoryMand[i].mendField)=='RadioButton'"
                                 class="radioButton form-control" style="width: 90%;">
-                                <div *ngFor="let category of implementControlSelection(filteredCategoryMand[i].mendField)" class="radioButton">
+                                <div *ngFor="let category of implementControlSelection(filteredCategoryMand[i].mendField)"
+                                    class="radioButton">
                                     <p-radioButton [inputId]="category.key" [value]="category.key"
                                         [formControlName]="filteredCategoryMand[i].mendField"></p-radioButton>
                                     <label [for]="category.key">{{ category.name }}</label>
                                 </div>
                             </div>
                             <!------------------------------------------------------------------------ Dropdown    ----------------------------------------------------------------------->
-                            <div *ngIf="returnFieldType(filteredCategoryMand[i].mendField)=='Dropdown'" style="width: 90%;">
-                                <p-dropdown [options]="implementControlSelection(filteredCategoryMand[i].mendField)" optionLabel="name" emptyMessage [filter]="true"
-                                    filterBy="name" placeholder="Select" optionValue="key"
-                                    [style]="{'minWidth':'100%', 'width': '100%'}"
+                            <div *ngIf="returnFieldType(filteredCategoryMand[i].mendField)=='Dropdown'"
+                                style="width: 90%;">
+                                <p-dropdown [options]="implementControlSelection(filteredCategoryMand[i].mendField)"
+                                    optionLabel="name" emptyMessage [filter]="true" filterBy="name" placeholder="Select"
+                                    optionValue="key" [style]="{'minWidth':'100%', 'width': '100%'}"
                                     [formControlName]="filteredCategoryMand[i].mendField" [showClear]="true">
                                     <ng-template let-category pTemplate="name">
                                         <div>
@@ -47,8 +54,7 @@
                                     </ng-template>
                                 </p-dropdown>
                             </div>
-
-
+                            <!------------------------------------------------------------------------ Error Span    ----------------------------------------------------------------------->
                             <span class="alert-danger" *ngIf="returnFormErrors(filteredCategoryMand[i].mendField)">
                                 {{returnFormErrors(filteredCategoryMand[i].mendField)}}
                             </span>
@@ -78,7 +84,7 @@
                     </span>
                 </div>
                 <br>
-                <button type="submit" class="btn btn-success" [disabled]="ticketForm.invalid">Submit</button>
+                <button type="Submit" class="shadow-button" [disabled]="ticketForm.invalid">Submit</button>
                 <!-- <hr>{{formErrors|json}}
                 <br>
                 <hr>{{validationMessages|json}} -->

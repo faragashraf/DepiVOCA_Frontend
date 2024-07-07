@@ -14,7 +14,8 @@
 }
 
 /* Ensure the content area grows to push the footer to the bottom */
- body, html {
+body,
+html {
   height: 100%;
   margin: 0;
   display: flex;
@@ -29,39 +30,83 @@
 
 .content {
   flex: 1;
-  margin: 0 auto;      /* Center the container horizontally */
+  margin: 0 auto;
+  /* Center the container horizontally */
   margin-top: .1rem;
-  width: 100% ;
-  max-width: 100vw;   /* Limit max width for large screens */
+  width: 100%;
+  max-width: 100vw;
+  /* Limit max width for large screens */
   height: auto;
-  background-color: #ffffff; /* Optional background color */
-  padding: 0 3rem ;            /* Optional padding */
-  border: 1px solid #ffffff;    /* Optional border */
-  box-sizing: border-box;    /* Ensures padding and border are included in the width */
+  background-color: #ffffff;
+  /* Optional background color */
+  padding: 0 3rem;
+  /* Optional padding */
+  border: 1px solid #ffffff;
+  /* Optional border */
+  box-sizing: border-box;
+  /* Ensures padding and border are included in the width */
   min-height: 80vh;
 }
 
-.container-main{
+.container-main {
   margin: auto;
-  padding: 1rem 0 ;
+  padding: 1rem;
   border-radius: 10px !important;
-  box-shadow: 1px 1px 20px 0px rgba(0, 0, 0, 0.342) !important; /* Adding shadow */
+  box-shadow: 1px 1px 20px 0px rgba(0, 0, 0, 0.342) !important;
+  /* Adding shadow */
   min-height: 80vh;
-  
+
 }
-.widget{
-  padding: 1rem ;
-  margin-left: 2%;
+.row{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.widget {
+  padding: 1rem;
+  margin: .5rem;
   border-radius: 10px !important;
-  box-shadow: 1px 1px 20px 0px rgba(0, 0, 0, 0.342) !important; /* Adding shadow */
+  box-shadow: 1px 1px 20px 0px rgba(0, 0, 0, 0.342) !important;
+  /* Adding shadow */
   min-height: auto;
 }
+
+.shadow-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 8px 5px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease, transform 0.1s ease;
+  outline: none; /* Removes default focus outline */
+}
+
+.shadow-button:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.shadow-button:active {
+  transform: scale(0.90); /* Makes the button smaller on click */
+}
+
+.shadow-button:disabled {
+  background-color: #b0c4de; /* Dimmed color */
+  color: #666666; /* Dimmed text color */
+  cursor: not-allowed; /* Change cursor to not-allowed */
+  box-shadow: none; /* Remove shadow */
+  opacity: 0.6; /* Add transparency */
+}
+
 /* Footer styling */
 .app-footer {
   background-color: #333;
   color: #fff;
-  padding: 1em 0;
-  position: fixed;
+  padding: 1.49rem;
+  position: sticky;
   bottom: 0;
   width: 100%;
 }

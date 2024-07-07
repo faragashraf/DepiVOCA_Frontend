@@ -194,9 +194,9 @@ export class AddNewTicketComponent implements OnInit {
     if (nestedControl) {
       this.setErrorsObjects(_mandData, nestedControl);
     }
-      // if (_mandData?.cdmendType == 'RadioButton' || _mandData?.cdmendType == 'Dropdown') {
-      //   this.implementControlSelection(_mandData.cdmendTbl)
-      // }
+    // if (_mandData?.cdmendType == 'RadioButton' || _mandData?.cdmendType == 'Dropdown') {
+    //   this.implementControlSelection(_mandData.cdmendTbl)
+    // }
     this.mandFileds.push(NestedForm);
   }
 
@@ -227,6 +227,9 @@ export class AddNewTicketComponent implements OnInit {
     if (<number>_mandData?.max > 0) {
       _validators.push({ key: 'max', value: `${fieldName} must be less than or equal ${_mandData?.max} ` })
     }
+    if (_mandData?.pattern) {
+      _validators.push({ key: 'pattern', value: `${fieldName} must be less than or equal ${_mandData?.cdmendTbl} ` })
+    }
     this.validationMessages.push({
       key: fieldName, validators: _validators
     });
@@ -252,6 +255,9 @@ export class AddNewTicketComponent implements OnInit {
     }
     if (Number(_mandData?.max) > 0) {
       newValidators.push(Validators.max(Number(_mandData?.max)))
+    }
+    if (_mandData?.pattern) {
+      newValidators.push(Validators.pattern(<string>_mandData?.cdmendTbl))
     }
     control.setValidators([...currentValidators, ...newValidators]);
     control.updateValueAndValidity();
