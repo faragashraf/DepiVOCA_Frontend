@@ -13,6 +13,8 @@ import { PrimengModule } from './shared/Modules/primeng.module';
 import { MessageService } from 'primeng/api';
 import { HomeComponent } from './shared/components/home/home.component';
 import { SpinnerService } from './shared/services/spinner.service';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import { FormlyModule } from '@ngx-formly/core';
 
 
 @NgModule({
@@ -29,7 +31,16 @@ import { SpinnerService } from './shared/services/spinner.service';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    PrimengModule
+    PrimengModule,
+
+
+
+    FormlyBootstrapModule,
+    FormlyModule.forRoot({
+      validationMessages: [{ name: 'required', message: 'This field is required' }],
+    }),
+
+
   ], schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [
     JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

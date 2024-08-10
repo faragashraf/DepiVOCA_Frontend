@@ -1,5 +1,5 @@
 <div class="container-main">
-    <div class="row">
+    <!-- <div class="row">
         <div class="widget  col-md-5">
             <p-chart type="line" [data]="data" [options]="options"></p-chart>
 
@@ -7,11 +7,18 @@
         <div class="widget col-md-3">
             <p-chart type="doughnut" [data]="data1" [options]="options1"></p-chart>
         </div>
+    </div> -->
+    <div class="row">
+        <div class="widget  col-md-8">
+            <form [formGroup]="form">
+                <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
+              </form>
+        </div>
     </div>
     <div class="row">
         <div class="widget  col-md-11">
-            <!-- <iframe src="http://localhost:9000" width="100%" height="1000px" frameborder="0"></iframe> -->
-            <iframe src="http://172.29.93.133/openproject" width="100%" height="1000px" frameborder="0"></iframe>
+            <!-- <iframe src="https://www.google.com/" width="100%" height="1000px" frameborder="0"></iframe> -->
+            <iframe src="http://localhost:4201/openproject" width="100%" height="1000px" frameborder="0"></iframe>
         </div>
     </div>
 </div>
